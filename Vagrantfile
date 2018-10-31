@@ -13,11 +13,12 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider :virtualbox do |v, override|
     v.gui = false
-    v.customize ["modifyvm", :id, "--memory", 4096]
+    v.customize ["modifyvm", :id, "--memory", 6144]
     v.customize ["modifyvm", :id, "--cpus", 1]
     v.customize ["modifyvm", :id, "--vram", "256"]
     v.customize ["modifyvm", :id, "--monitorcount", "2"]
     # v.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
     # v.customize ["setextradata", :id, "CustomVideoMode1", "1024x768x32"]
   end
+  config.vm.provision :shell, :inline  => "Get-NetConnectionProfile | Set-NetConnectionProfile -NetworkCategory Private"
 end
